@@ -1,0 +1,9 @@
+<%=form_with model: @room do |f|%>
+<div class="form-control">
+  <%=f.label :name%>
+  <%=f.text_field :name%>
+</div>
+<div class="container">
+<%= f.submit data: { disable_with: false } %>
+</div>
+<%end%>

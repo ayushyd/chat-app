@@ -1,0 +1,26 @@
+<div class="message">
+  <p><strong><%= message.user.username %>:</strong> <%= message.context %></p>
+  <% if message.attachment.attached? %>
+    <p><%= image_tag(message.attachment) %></p>
+  <% end %>
+
+<div class="reaction">
+  <%message.reactions.each do |reaction|%>
+  <span><%=reaction.reaction_type%></span> by <%=reaction.user.username%></span>
+  <%end%>
+</div>
+
+  <div class="reaction-count">
+    <strong>Total Reactions: <%= message.reactions.count %></strong>
+  </div>
+
+  <%= form_with model: [message, Reaction.new],url: chat_room_message_reactions_path(message.chat_room, message), data: {turbo_stream: true} do |f| %>
+    <%= f.hidden_field :reaction_type, value: 'Like' %>
+    <%= f.submit "👍" %>
+  <% end %>
+
+  <%= form_with model: [message, Reaction.new],url: chat_room_message_reactions_path(message.chat_room, message), data: {turbo_stream: true} do |f| %>
+    <%= f.hidden_field :reaction_type, value: 'Love' %>
+    <%= f.submit "❤️" %>
+  <% end %>
+</div>  

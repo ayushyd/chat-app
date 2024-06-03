@@ -1,0 +1,21 @@
+<%=form_with model: @post do |f|%>
+<div class = "container">
+	<%=f.label :title%>
+	<%=f.text_field :title, placeholder: "Enter title"%>
+</div>
+
+<div class = "container">
+	<%=f.label :body%>
+	<%=f.text_area :body, placeholder: "Enter title"%>
+</div>
+
+<div class = "container">
+	<%=f.label :user_id%>
+	<%= f.select :user_id, User.all.map { |user| [user.email, user.id] }, prompt: 'Select a user' %>
+</div>
+
+<div class = "container">
+	<%=f.submit "Post Create"%>
+</div>
+
+<%end%>

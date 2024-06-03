@@ -1,0 +1,16 @@
+
+<div class="container">
+  <h5> Hi</h5>
+  <h4> Users </h4>
+  <h4> Rooms </h4>
+  <%= render partial: "layouts/new_room_form" %>
+  <%= turbo_stream_from "rooms"%>
+  <div id = "rooms">
+    <%=render @rooms%>
+  </div>
+    <%= turbo_stream_from @single_room %>
+  <div id="messages">
+  </div>
+  <%= render partial: 'layouts/new_message_form' %>
+
+</div>

@@ -1,0 +1,16 @@
+<h1><%= @chat_room.name %></h1>
+<div id="messages">
+  <%= render @messages %>
+</div>
+<div class="row">
+  <%= form_with model: [@chat_room, Message.new], data: { turbo_stream: true, turbo_frame: "messages" } do |f| %>
+  <div class="form-group">
+    <%= f.text_area :context, rows: 3 %>
+    <%=f.file_field :attachment%>
+    <%= f.submit "Send" %>
+  </div>  
+  <% end %>
+</div>
+
+<%= turbo_frame_tag "messages" %>
+<%= turbo_stream_from "chat_#{@chat_room.id}" %>
